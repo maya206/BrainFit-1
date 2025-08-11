@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-
+import 'screens/homescreen.dart'; 
+import 'screens/welcomenamescreen.dart';
+import 'screens/menuscreen.dart';
+import 'screens/Voirplusscreen.dart';
 
 void main() {
   runApp(const BrainFitApp());
@@ -32,7 +34,23 @@ class BrainFitApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
+       // Déclare les routes ici
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        'home/': (context) => HomeScreen(),
+        '/welcomename': (context) => WelcomeNameScreen(),
+        '/menu': (context) => MenuScreen(
+        userName: "John", // à récupérer dynamiquement plus tard
+        avatarPath: 'assets/images/avatar.jpg', // idem
+        onSeeMorePressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const VoirPlusScreen()),
+          );
+        },
+      ),
+      }
     );
   }
 }

@@ -59,8 +59,17 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
-  #   - images/background.png
-  #   - images/a_dot_ham.jpeg
+  #   - images/background.jpg
+  #   - images/avatar.jpg
+  #   - icons/motivation.png
+  #   - icons/puzzle.png
+  #   - icons/quiz.png
+  #   - icons/visuel.png
+  #   - icons/jeux de mots.png
+  #   - icons/memory.png
+  #   - icons/yoga.png
+  
+  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -74,9 +83,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-  #   - family: Schyler
+  #   - family: OpenDyslexic
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: assets/fonts/OpenDyslexic-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
