@@ -15,7 +15,6 @@ class VoirPlusScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             // Section Jeux
             const Text(
               "Jeux",
@@ -27,55 +26,17 @@ class VoirPlusScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildCard("Puzzle", "assets/icons/puzzle.png"),
+                  _buildCard("Puzzle", "assets/icons/puzzle."),
                   _buildCard("Mémoire", "assets/icons/memoire.png"),
                   _buildCard("Quiz", "assets/icons/quiz.png"),
                 ],
               ),
             ),
-
-            const SizedBox(height: 20),
-
-            // Section Tutoriels
-            const Text(
-              "Tutoriels",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _buildCard("Comment jouer", "assets/images/tuto1.jpg"),
-                  _buildCard("Utiliser Brainfit", "assets/images/tuto2.jpg"),
-                ],
+            ]
               ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Section Yoga
-            const Text(
-              "Yoga",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 150,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _buildCard("Relaxation", "assets/images/yoga1.jpg"),
-                  _buildCard("Respiration", "assets/images/yoga2.jpg"),
-                ],
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+              );
+                }
 
   static Widget _buildCard(String title, String imagePath) {
     return Container(
