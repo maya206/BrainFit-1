@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen ({super.key});
@@ -8,8 +9,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>{
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfNameExists();
+  }
+
+  Future<void> _checkIfNameExists() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? name = prefs.getString('userName');
+
+    if (name != null && name.isNotEmpty) {
+      // Si prénom trouvé, naviguer directement vers MenuScreen
+      Navigator.pushReplacementNamed(context, '/menu');
+    } else {
+      // Sinon, rester sur HomeScreen et afficher la page normalement
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      // Affiche un loader pendant la vérification
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text("Page d'accueil")),
       body: Stack(
@@ -65,22 +96,22 @@ class _HomeScreenState extends State<HomeScreen>{
                   ),
                   const SizedBox(height: 40),
                   // Bouton Démarrer
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/welcomename');
                     },
-                      child: const Text(
-                       'Démarrer',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.blueAccent,
+                    child: const Text(
+                      'Démarrer',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent,
                         fontFamily: 'OpenDyslexic',
                       ),
                     ),
@@ -93,7 +124,6 @@ class _HomeScreenState extends State<HomeScreen>{
                       fontFamily: 'OpenDyslexic',
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
-
                     ),
                   ),
                 ],

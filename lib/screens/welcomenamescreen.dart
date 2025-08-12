@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeNameScreen extends StatefulWidget {
   const WelcomeNameScreen({super.key});
@@ -16,11 +17,14 @@ class _WelcomeNameScreenState extends State<WelcomeNameScreen> {
     super.dispose();
   }
 
-  void _goToMenuScreen() {
+  Future<void> _saveNameAndGoToMenu() async {
     final String name = _nameController.text.trim();
+
     if (name.isNotEmpty) {
-      // Tu peux stocker ce nom et le passer à la page suivante si besoin
-      Navigator.pushNamed(context, '/menu'); // à condition que /menu soit bien enregistré
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userName', name);
+
+      Navigator.pushNamed(context, '/menu');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Veuillez entrer votre prénom.')),
@@ -60,7 +64,7 @@ class _WelcomeNameScreenState extends State<WelcomeNameScreen> {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: _goToMenuScreen,
+                onPressed: _saveNameAndGoToMenu,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                   padding: const EdgeInsets.symmetric(
