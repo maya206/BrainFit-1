@@ -32,10 +32,29 @@ class _WelcomeNameScreenState extends State<WelcomeNameScreen> {
     }
   }
 
+  void _goBackToHome() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/home', // Nom de la route de ton HomeScreen
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text(
+          "Bienvenue",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: _goBackToHome,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Center(
