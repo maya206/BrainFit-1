@@ -26,7 +26,7 @@ class VoirPlusScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildCard("Puzzle", "assets/icons/puzzle."),
+                  _buildCard("Puzzle", "assets/icons/puzzle.png"),
                   _buildCard("Mémoire", "assets/icons/memoire.png"),
                   _buildCard("Quiz", "assets/icons/quiz.png"),
                 ],
