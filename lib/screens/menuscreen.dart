@@ -57,6 +57,23 @@ class MenuScreen extends StatelessWidget{
     final String currentMotivation = getCurrentMotivationPhrase();
 
     return Scaffold(
+      appBar: AppBar(
+    title: const Text(
+      "Menu principal",
+      style: TextStyle(
+        fontFamily: 'OpenDyslexic',
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context,'/welcomename'); // Retour à l'écran précédent
+      },
+    ),
+    backgroundColor: Colors.blue[100],
+    elevation: 0,
+  ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -141,21 +158,53 @@ class MenuScreen extends StatelessWidget{
               ),
               const SizedBox(height: 16),
 
-              // Liste horizontale limitée des jeux
-              SizedBox(
-                height: 110,
+              // Liste verticale des jeux (icône à gauche, texte à droite)
+              Expanded(
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: visibleGames.length,
-                  itemBuilder: (context, index) {
-                    final game = visibleGames[index];
-                    return buildGameCard(context, game);
-                  },
+                itemCount: visibleGames.length,
+                itemBuilder: (context, index) {
+                final game = visibleGames[index];
+                return InkWell(
+                onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Ouverture du jeu : ${game.title}")),
+                );
+              },
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade200,
+                blurRadius: 4,
+                offset: const Offset(2, 2),
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Image.asset(game.iconPath, width: 40),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  game.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'OpenDyslexic',
+                  ),
                 ),
               ),
-
-              const SizedBox(height: 24),
-
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+),
               // Rappel médicament (statique)
               Container(
                 width: double.infinity,
