@@ -11,7 +11,7 @@ class Bottomnavigationbar extends StatefulWidget {
 class _BottomnavigationbarState extends State<Bottomnavigationbar> {
   int _currentIndex = 0;
 
-  final String userName = "John"; // À remplacer par gestion utilisateur réelle
+  final String userName = "Maya"; // À remplacer par gestion utilisateur réelle
   final String avatarPath = "assets/images/avatar.jpg";
 
   // Liste des écrans que tu veux afficher

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ui';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen ({super.key});
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen>{
     return Scaffold(
       appBar: AppBar(title: const Text("Page d'accueil")),
       body: Stack(
+        fit: StackFit.expand,
         children: [
           // Arrière-plan : image + superposition douce
           Container(
@@ -53,10 +55,13 @@ class _HomeScreenState extends State<HomeScreen>{
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX:10,sigmaY:10),
             child: Container(
               color: Colors.black.withOpacity(0.15), // superposition légère comme de l'eau
             ),
-          ),
+            ),
 
           // Contenu centré
           Center(

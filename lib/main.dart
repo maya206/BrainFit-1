@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'screens/homescreen.dart'; 
@@ -36,6 +35,7 @@ class BrainFitApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const HomeScreen(),
        // Déclare les routes ici
@@ -45,11 +45,11 @@ class BrainFitApp extends StatelessWidget {
         'home/': (context) => HomeScreen(),
         '/welcomename': (context) => WelcomeNameScreen(),
         '/menu': (context) => MenuScreen(
-        userName: "John", // à récupérer dynamiquement plus tard
+        userName: "Maya", // à récupérer dynamiquement plus tard
         avatarPath: 'assets/images/avatar.jpg', // idem
         onSeeMorePressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const VoirPlusScreen()),
+            MaterialPageRoute(builder: (_) => VoirPlusScreen()),
           );
         },
       ),
